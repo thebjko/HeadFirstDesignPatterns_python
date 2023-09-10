@@ -1,4 +1,8 @@
-class FlyBehavior:
+from abc import ABC, abstractmethod
+
+
+class FlyBehavior(ABC):
+    @abstractmethod
     def fly(self):
         raise NotImplementedError
 
@@ -18,7 +22,8 @@ class FlyRocketPowered(FlyBehavior):
         print("I'm flying with a rocket!'")
 
 
-class QuackBehavior:
+class QuackBehavior(ABC):
+    @abstractmethod
     def quack(self):
         raise NotImplementedError
 
