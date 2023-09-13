@@ -1,3 +1,84 @@
+from abc import ABC, abstractmethod
+
+
+class Observer(ABC):
+    @abstractmethod
+    def update(self, temp: float, humidity: float, pressure: float):
+        pass
+
+
+class Subject(ABC):
+    @abstractmethod
+    def register_observer(self, observer: Observer):
+        pass
+
+    @abstractmethod
+    def remove_observer(self, observer: Observer):
+        pass
+
+    @abstractmethod
+    def notify_observers(self):
+        pass
+
+
+class DisplayElement(ABC):
+    @abstractmethod
+    def display(self):
+        pass
+
+
+class WeatherData(Subject):
+
+    def __init__(self):
+        self._observers: list[Observer] = []
+        self._temperature: float = None
+        self._humidity: float = None
+        self._pressure: float = None
+
+    def register_observer(self, observer: Observer):
+        self._observers.append(observer)
+
+    def remove_observer(self, observer: Observer):
+        self._observers.remove(observer)
+    
+    def notify_observers(self):
+        for o in self._observers:
+            o.update(self._temperature)
+    
+    def measurement_changed(self):
+        self.notify_observers()
+
+    def set_measurements(self, temperature: float, humidity: float, pressure: float):
+        self._temperature = temperature
+        self._humidity = humidity
+        self._pressure = pressure
+        self.measurement_changed()
+
+
+w = WeatherData()
+w.register_observer('a')
+
+def get_temperature():
+    pass
+
+def get_humidity():
+    pass
+
+def get_pressure():
+    pass
+
+class WeatherData:
+    def __init__(self):
+        self.temp: float = None
+        self.humidity: float = None
+        self.pressure: float = None
+
+    def measurements_changed(self):
+        self.temp: float = get_temperature()
+        self.humidity: float = get_humidity()
+        self.pressure: float = get_pressure()
+
+
 class Subject:
     def register_observer(self, observer):
         raise NotImplementedError
@@ -154,5 +235,5 @@ def weather_station():
     weather_data.set_measurements(62, 90, 28.1)
 
 
-if __name__ == "__main__":
-    weather_station()
+# if __name__ == "__main__":
+#     weather_station()
