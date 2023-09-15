@@ -29,53 +29,53 @@ class DisplayElement(ABC):
 
 class WeatherData(Subject):
     def __init__(self):
-        self._observers: list[Observer] = []
-        self._temperature: float = None
-        self._humidity: float = None
-        self._pressure: float = None
+        self.__observers: list[Observer] = []
+        self.__temperature: float = None
+        self.__humidity: float = None
+        self.__pressure: float = None
 
     def register_observer(self, observer: Observer):
-        self._observers.append(observer)
+        self.__observers.append(observer)
 
     def remove_observer(self, observer: Observer):
-        self._observers.remove(observer)
+        self.__observers.remove(observer)
     
     def notify_observers(self):
-        for o in self._observers:
+        for o in self.__observers:
             o.update()
     
     def measurement_changed(self):
         self.notify_observers()
 
     def set_measurements(self, temperature: float, humidity: float, pressure: float):
-        self._temperature = temperature
-        self._humidity = humidity
-        self._pressure = pressure
+        self.__temperature = temperature
+        self.__humidity = humidity
+        self.__pressure = pressure
         self.measurement_changed()
 
     @property
     def humidity(self):
-        return self._humidity
+        return self.__humidity
     
     @property
     def temperature(self):
-        return self._temperature
+        return self.__temperature
 
 
 class CurrentConditionsDisplay(Observer, DisplayElement):
     def __init__(self, weather_data: WeatherData):
-        self._temperature: float = 0
-        self._humidity: float = 0
-        self._weather_data: WeatherData = weather_data
+        self.__temperature: float = 0
+        self.__humidity: float = 0
+        self.__weather_data: WeatherData = weather_data
         weather_data.register_observer(self)
 
     def update(self):
-        self._temperature = self._weather_data.temperature
-        self._humidity = self._weather_data.humidity
+        self.__temperature = self.__weather_data.temperature
+        self.__humidity = self.__weather_data.humidity
         self.display()
 
     def display(self):
-        print(f'Current Condition: temperature {self._temperature} F, humidity {self._humidity} %')
+        print(f'Current Condition: temperature {self.__temperature} F, humidity {self.__humidity} %')
 
 
 def get_temperature():
