@@ -42,7 +42,7 @@ class WeatherData(Subject):
     
     def notify_observers(self):
         for o in self._observers:
-            o.update(self._temperature, self._humidity, self._pressure)
+            o.update()
     
     def measurement_changed(self):
         self.notify_observers()
@@ -53,6 +53,14 @@ class WeatherData(Subject):
         self._pressure = pressure
         self.measurement_changed()
 
+    @property
+    def humidity(self):
+        return self._humidity
+    
+    @property
+    def temperature(self):
+        return self._temperature
+
 
 class CurrentConditionsDisplay(Observer, DisplayElement):
     def __init__(self, weather_data: WeatherData):
@@ -61,9 +69,9 @@ class CurrentConditionsDisplay(Observer, DisplayElement):
         self._weather_data: WeatherData = weather_data
         weather_data.register_observer(self)
 
-    def update(self, temperature: float, humidity: float, pressure: float):
-        self._temperature = temperature
-        self._humidity = humidity
+    def update(self):
+        self._temperature = self._weather_data.temperature
+        self._humidity = self._weather_data.humidity
         self.display()
 
     def display(self):
