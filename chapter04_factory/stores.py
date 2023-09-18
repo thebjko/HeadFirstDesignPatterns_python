@@ -69,5 +69,5 @@ class CaliforniaPizzaStore(PizzaStore):
 
 
 if __name__ == '__main__':
-    store = CaliforniaPizzaStore()
-    print(store.order_pizza('pepperoni'))
+    store = ChicagoPizzaStore()
+    print(store.order_pizza('cheese'))
