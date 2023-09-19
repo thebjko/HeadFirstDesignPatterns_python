@@ -10,16 +10,16 @@ class PizzaStore(ABC):
         pass
 
     def order_pizza(self, pizza_type: str) -> Pizza:
-        self.pizza: Pizza = self._create_pizza(pizza_type)
+        pizza: Pizza = self._create_pizza(pizza_type)
 
-        if self.pizza is not None:
+        if pizza is not None:
 
-            self.pizza.prepare()
-            self.pizza.bake()
-            self.pizza.cut()
-            self.pizza.box()
+            pizza.prepare()
+            pizza.bake()
+            pizza.cut()
+            pizza.box()
 
-            return self.pizza
+            return pizza
 
 
 class NYPizzaStore(PizzaStore):
