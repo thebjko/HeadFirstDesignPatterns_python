@@ -12,12 +12,14 @@ class PizzaStore(ABC):
     def order_pizza(self, pizza_type: str) -> Pizza:
         self.pizza: Pizza = self._create_pizza(pizza_type)
 
-        self.pizza.prepare()
-        self.pizza.bake()
-        self.pizza.cut()
-        self.pizza.box()
+        if self.pizza is not None:
 
-        return self.pizza
+            self.pizza.prepare()
+            self.pizza.bake()
+            self.pizza.cut()
+            self.pizza.box()
+
+            return self.pizza
 
 
 class NYPizzaStore(PizzaStore):
@@ -33,8 +35,6 @@ class NYPizzaStore(PizzaStore):
             case 'veggie':
                 return NYStyleVeggiePizza()
 
-        return None
-
 
 class ChicagoPizzaStore(PizzaStore):
 
@@ -48,8 +48,6 @@ class ChicagoPizzaStore(PizzaStore):
                 return ChicagoClamPizza()
             case 'veggie':
                 return ChicagoVeggiePizza()
-
-        return None
 
 
 class CaliforniaPizzaStore(PizzaStore):
@@ -65,9 +63,7 @@ class CaliforniaPizzaStore(PizzaStore):
             case 'veggie':
                 return CaliforniaVeggiePizza()
 
-        return None
-
 
 if __name__ == '__main__':
     store = ChicagoPizzaStore()
-    print(store.order_pizza('cheese'))
+    print(store.order_pizza('cheesde'))
