@@ -16,7 +16,6 @@ class Pepperoni:
 class Veggies:
     pass
 
-
 class ThinCrustDough(Dough):
     pass
 

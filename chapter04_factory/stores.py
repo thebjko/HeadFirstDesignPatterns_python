@@ -25,15 +25,25 @@ class PizzaStore(ABC):
 class NYPizzaStore(PizzaStore):
 
     def _create_pizza(self, pizza_type: str) -> Pizza:
+        ingredient_factory: PizzaIngredientFactory = NYPizzaIngredientFactory()
+
         match pizza_type:
             case 'cheese':
-                return NYStyleCheesePizza()
+                pizza = CheesePizza(ingredient_factory)
+                pizza.name = '뉴욕 스타일 치즈 피자'
             case 'pepperoni':
-                return NYStylePepperoniPizza()
+                pizza = PepperoniPizza(ingredient_factory)
+                pizza.name = '뉴욕 스타일 페퍼로니 피자'
             case 'clam':
-                return NYStyleClamPizza()
+                pizza = ClamPizza(ingredient_factory)
+                pizza.name = '뉴욕 스타일 클램 피자'
             case 'veggie':
-                return NYStyleVeggiePizza()
+                pizza = VeggiePizza(ingredient_factory)
+                pizza.name = '뉴욕 스타일 야채피자'
+            case _ :
+                return
+        
+        return pizza
 
 
 class ChicagoPizzaStore(PizzaStore):
@@ -62,8 +72,3 @@ class CaliforniaPizzaStore(PizzaStore):
                 return CaliforniaClamPizza()
             case 'veggie':
                 return CaliforniaVeggiePizza()
-
-
-if __name__ == '__main__':
-    store = ChicagoPizzaStore()
-    print(store.order_pizza('cheesde'))

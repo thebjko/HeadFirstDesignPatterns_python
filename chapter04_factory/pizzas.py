@@ -1,19 +1,16 @@
 from abc import ABC, abstractmethod
 
+from factories import *
+
 
 class Pizza(ABC):
     name: str
-    dough: str
-    sauce: str
-    toppings: list[str] = []
-    
-    # def prepare(self):
-    #     print('준비 중:', self.name)
-    #     print('도우를 돌리는 중...')
-    #     print('소스를 뿌리는 중...')
-    #     print('토핑을 올리는 중: ')
-    #     for t in self.toppings:
-    #         print(' ' + t)
+    dough: Dough
+    sauce: Sauce
+    veggies: list[Veggies]
+    cheese: Cheese
+    pepperoni: Pepperoni
+    clam: Clam
 
     @abstractmethod
     def prepare(self):
@@ -31,6 +28,44 @@ class Pizza(ABC):
     def box(self):
         print('상자에 피자 담기')
 
+    def __str__(self):
+        return self.name
+
+
+class CheesePizza(Pizza):
+    def __init__(self, ingredient_factory: PizzaIngredientFactory):
+        self.ingredient_factory = ingredient_factory
+
+    def prepare(self):
+        print('준비중:', self.name)
+        self.dough = self.ingredient_factory.create_dough()
+        self.sauce = self.ingredient_factory.create_sauce()
+        self.cheese = self.ingredient_factory.create_cheese()
+
+
+class ClamPizza(Pizza):
+    def __init__(self, ingredient_factory: PizzaIngredientFactory):
+        self.ingredient_factory = ingredient_factory
+
+    def prepare(self):
+        print('준비중:', self.name)
+        self.dough = self.ingredient_factory.create_dough()
+        self.sauce = self.ingredient_factory.create_sauce()
+        self.cheese = self.ingredient_factory.create_cheese()
+        self.clam = self.ingredient_factory.create_clam()
+
+
+class PepperoniPizza(Pizza):
+    def __init__(self, ingredient_factory: PizzaIngredientFactory):
+        self.ingredient_factory = ingredient_factory
+
+    def prepare(self):
+        print('준비중:', self.name)
+        self.dough = self.ingredient_factory.create_dough()
+        self.sauce = self.ingredient_factory.create_sauce()
+        self.cheese = self.ingredient_factory.create_cheese()
+        self.pepperoni = self.ingredient_factory.create_pepperoni()
+
 
 class NYStyleCheesePizza(Pizza):
     def __init__(self):
@@ -40,6 +75,17 @@ class NYStyleCheesePizza(Pizza):
 
         self.toppings.append('잘게 썬 레지아노 치즈')
 
+
+class VeggiePizza(Pizza):
+    def __init__(self, ingredient_factory: PizzaIngredientFactory):
+        self.ingredient_factory = ingredient_factory
+
+    def prepare(self):
+        print('준비중:', self.name)
+        dough = self.ingredient_factory.create_dough()
+        sauce = self.ingredient_factory.create_sauce()
+        cheese = self.ingredient_factory.create_cheese()
+        veggies = self.ingredient_factory.create_veggies()
 
 class NYStylePepperoniPizza(Pizza):
     pass
