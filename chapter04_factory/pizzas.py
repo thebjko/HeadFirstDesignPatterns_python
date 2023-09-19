@@ -7,13 +7,20 @@ class Pizza(ABC):
     sauce: str
     toppings: list[str] = []
     
+    # def prepare(self):
+    #     print('준비 중:', self.name)
+    #     print('도우를 돌리는 중...')
+    #     print('소스를 뿌리는 중...')
+    #     print('토핑을 올리는 중: ')
+    #     for t in self.toppings:
+    #         print(' ' + t)
+
+    @abstractmethod
     def prepare(self):
-        print('준비 중:', self.name)
-        print('도우를 돌리는 중...')
-        print('소스를 뿌리는 중...')
-        print('토핑을 올리는 중: ')
-        for t in self.toppings:
-            print(' ' + t)
+        '''
+        원재료 팩토리에서 재료들을 가져오는 메서드
+        '''
+        pass
 
     def bake(self):
         print('175도에서 25분 간 굽기')
