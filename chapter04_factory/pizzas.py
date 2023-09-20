@@ -34,7 +34,7 @@ class Pizza(ABC):
 
 class CheesePizza(Pizza):
     def __init__(self, ingredient_factory: PizzaIngredientFactory):
-        self.ingredient_factory = ingredient_factory
+        self.ingredient_factory = ingredient_factory   # 객체 구성
 
     def prepare(self):
         print('준비중:', self.name)

@@ -4,7 +4,7 @@ from pizzas import *
 
 
 class PizzaStore(ABC):
-    '''<< Interface >> Abstract Factory'''
+    '''<< Interface >> Factory Method Pattern'''
 
     @abstractmethod
     def _create_pizza(self, pizza_type: str) -> Pizza:
@@ -24,6 +24,7 @@ class PizzaStore(ABC):
 
 
 class NYPizzaStore(PizzaStore):
+    '''Factory Method Pattern'''
 
     def _create_pizza(self, pizza_type: str) -> Pizza:
         ingredient_factory: PizzaIngredientFactory = NYPizzaIngredientFactory()
@@ -48,6 +49,7 @@ class NYPizzaStore(PizzaStore):
 
 
 class ChicagoPizzaStore(PizzaStore):
+    '''Factory Method Pattern'''
 
     def _create_pizza(self, pizza_type: str) -> Pizza:
         match pizza_type:

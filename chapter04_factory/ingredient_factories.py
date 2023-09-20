@@ -4,7 +4,8 @@ from ingredients import *
 
 
 class PizzaIngredientFactory(ABC):
-    '''<< Interface >> Abstract Factory'''
+    '''<< Interface >> Abstract Factory Pattern'''
+
     @abstractmethod
     def create_dough(self) -> Dough:
         pass
@@ -31,6 +32,8 @@ class PizzaIngredientFactory(ABC):
 
 
 class NYPizzaIngredientFactory(PizzaIngredientFactory):
+    '''Abstract Factory Pattern'''
+
     def create_cheese(self) -> Cheese:
         return ReggianoCheese()
     
@@ -52,6 +55,8 @@ class NYPizzaIngredientFactory(PizzaIngredientFactory):
     
 
 class ChicagoPizzaIngredientFactory(PizzaIngredientFactory):
+    '''Abstract Factory Pattern'''
+
     def create_cheese(self) -> Cheese:
         return MozzarellaCheese()
     
