@@ -27,6 +27,7 @@ class NYPizzaStore(PizzaStore):
     '''Factory Method Pattern'''
 
     def _create_pizza(self, pizza_type: str) -> Pizza:
+        '''Simple Factory'''
         ingredient_factory: PizzaIngredientFactory = NYPizzaIngredientFactory()
 
         match pizza_type:
@@ -52,6 +53,7 @@ class ChicagoPizzaStore(PizzaStore):
     '''Factory Method Pattern'''
 
     def _create_pizza(self, pizza_type: str) -> Pizza:
+        '''Simple Factory'''
         match pizza_type:
             case 'cheese':
                 return ChicagoCheesePizza()
