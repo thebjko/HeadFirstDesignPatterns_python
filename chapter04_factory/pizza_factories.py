@@ -4,6 +4,7 @@ from pizzas import *
 
 
 class PizzaStore(ABC):
+    '''<< Interface >> Abstract Factory'''
 
     @abstractmethod
     def _create_pizza(self, pizza_type: str) -> Pizza:

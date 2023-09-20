@@ -4,6 +4,7 @@ from ingredients import *
 
 
 class PizzaIngredientFactory(ABC):
+    '''<< Interface >> Abstract Factory'''
     @abstractmethod
     def create_dough(self) -> Dough:
         pass

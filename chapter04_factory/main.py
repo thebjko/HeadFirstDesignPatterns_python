@@ -1,4 +1,4 @@
-from stores import *
+from pizza_factories import *
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from factories import *
+from ingredient_factories import *
 
 
 class Pizza(ABC):
