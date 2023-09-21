@@ -1,3 +1,6 @@
+'''https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/'''
+
+
 class ChocolateBoiler:
     __empty: bool
     __boild: bool
