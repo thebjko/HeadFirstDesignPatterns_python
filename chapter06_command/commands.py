@@ -1,0 +1,26 @@
+from abc import ABCMeta, abstractmethod
+
+from objects import *
+
+
+class Command(metaclass=ABCMeta):
+    '''<< interface >>'''
+    @abstractmethod
+    def execute(self) -> None:
+        pass
+
+
+class LightOnCommand(Command):
+    def __init__(self, light: Light):
+        self.light = light
+
+    def execute(self) -> None:
+        self.light.on()
+
+
+class GarageDoorOpenCommand(Command):
+    def __init__(self, door: GarageDoor):
+        self.door = door
+
+    def execute(self) -> None:
+        self.door.up()
