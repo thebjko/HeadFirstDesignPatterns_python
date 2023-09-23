@@ -8,3 +8,9 @@ class Command(metaclas=ABCMeta):
         pass
 
 
+class LightOnCommand(Command):
+    def __init__(self, light):
+        self.light = light
+
+    def execute(self) -> None:
+        self.light.on()
