@@ -2,6 +2,9 @@ class Light:
     def on(self):
         print('light is on')
 
+    def off(self):
+        print('light is off')
+
 
 class GarageDoor:
     def up(self):

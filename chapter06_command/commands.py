@@ -19,6 +19,15 @@ class LightOnCommand(Command):
         self.light.on()
 
 
+class LightOffCommand(Command):
+    '''concrete command'''
+    def __init__(self, light: Light):
+        self.light = light
+
+    def execute(self) -> None:
+        self.light.off()
+
+
 class GarageDoorOpenCommand(Command):
     '''concrete command'''
     def __init__(self, door: GarageDoor):
