@@ -21,3 +21,14 @@ class GarageDoor:
     
     def light_off(self):
         print('light off')
+
+
+class Stereo:
+    def on(self):
+        print('stereo is on')
+    
+    def set_CD(self):
+        print('CD is set')
+
+    def set_volume(val: int):
+        print(f'volume is set to {val}')

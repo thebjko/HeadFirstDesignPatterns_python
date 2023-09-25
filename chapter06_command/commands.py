@@ -37,6 +37,16 @@ class GarageDoorOpenCommand(Command):
         self.door.up()
 
 
+class StereoOnWithCDCommand(Command):
+    def __init__(self, stereo):
+        self.stereo = stereo
+    
+    def execute(self):
+        self.stereo.on()
+        self.stereo.set_CD()
+        self.setero.set_volume(11)
+
+
 class NoCommand:
     '''?'''
     def execute(self):
