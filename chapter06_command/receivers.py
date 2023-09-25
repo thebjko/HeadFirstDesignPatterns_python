@@ -35,6 +35,9 @@ class Stereo:
 
     def on(self):
         print('stereo is on')
+
+    def off(self):
+        print('stereo is off')
     
     def set_CD(self):
         print('CD is set')

@@ -54,6 +54,15 @@ class StereoOnWithCDCommand(Command):
         self.setero.set_volume(11)
 
 
+class StereoOffWithCDCommand(Command):
+    def __init__(self, stereo):
+        self.stereo = stereo
+    
+    def execute(self):
+        self.setero.set_volume(0)
+        self.stereo.set_CD()
+        self.stereo.of()
+
 class NoCommand:
     '''?'''
     def execute(self):
