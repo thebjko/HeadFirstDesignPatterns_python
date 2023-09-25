@@ -42,5 +42,5 @@ class Stereo:
     def set_CD(self):
         print('CD is set')
 
-    def set_volume(val: int):
+    def set_volume(self, val: int):
         print(f'volume is set to {val}')
