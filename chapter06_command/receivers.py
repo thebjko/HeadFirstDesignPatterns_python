@@ -33,10 +33,14 @@ class Stereo:
     def __init__(self, desc: str):
         self.description = desc
 
-    def on(self):
+    def on(self, val = 11):
         print('stereo is on')
+        self.set_CD()
+        self.set_volume(val)
 
-    def off(self):
+    def off(self, val = 0):
+        self.set_volume(val)
+        self.set_CD()
         print('stereo is off')
     
     def set_CD(self):
