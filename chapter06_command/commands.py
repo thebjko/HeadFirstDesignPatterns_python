@@ -36,6 +36,13 @@ class GarageDoorOpenCommand(Command):
     def execute(self) -> None:
         self.door.up()
 
+class GarageDoorDownCommand(Command):
+    def __init__(self, door: GarageDoor):
+        self.door = door
+
+    def execute(self):
+        self.door.down()
+
 
 class StereoOnWithCDCommand(Command):
     def __init__(self, stereo):
