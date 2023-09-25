@@ -1,4 +1,7 @@
 class Light:
+    def __init__(self, desc: str):
+        self.description = desc
+
     def on(self):
         print('light is on')
 
@@ -7,6 +10,9 @@ class Light:
 
 
 class GarageDoor:
+    def __init__(self, desc: str):
+        self.description = desc
+        
     def up(self):
         print('door is upping')
     
@@ -24,6 +30,9 @@ class GarageDoor:
 
 
 class Stereo:
+    def __init__(self, desc: str):
+        self.description = desc
+
     def on(self):
         print('stereo is on')
     
