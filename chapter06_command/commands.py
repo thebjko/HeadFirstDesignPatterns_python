@@ -26,3 +26,9 @@ class GarageDoorOpenCommand(Command):
 
     def execute(self) -> None:
         self.door.up()
+
+
+class NoCommand:
+    '''?'''
+    def execute(self):
+        print('no commands on this slot')
