@@ -2,6 +2,7 @@ from commands import *
 
 
 class SimpleRemoteControl:
+    '''invoker?'''
     def __init__(self):
         self.slot = None
 

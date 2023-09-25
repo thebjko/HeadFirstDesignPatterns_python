@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from objects import *
+from receivers import *
 
 
 class Command(metaclass=ABCMeta):
@@ -11,6 +11,7 @@ class Command(metaclass=ABCMeta):
 
 
 class LightOnCommand(Command):
+    '''concrete command'''
     def __init__(self, light: Light):
         self.light = light
 
@@ -19,6 +20,7 @@ class LightOnCommand(Command):
 
 
 class GarageDoorOpenCommand(Command):
+    '''concrete command'''
     def __init__(self, door: GarageDoor):
         self.door = door
 
