@@ -9,6 +9,10 @@ class Command(metaclass=ABCMeta):
     def execute(self) -> None:
         pass
 
+    @abstractmethod
+    def undo(self) -> None:
+        pass
+
 
 class LightOnCommand(Command):
     '''concrete command'''
