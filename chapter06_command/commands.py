@@ -95,3 +95,46 @@ class NoCommand:
 
     def undo(self):
         pass
+
+
+class CeilingFanCommand(Command):
+    def __init__(self, ceiling_fan) -> None:
+        self.ceiling_fan = ceiling_fan
+    
+    def execute(self) -> None:
+        self.prev_speed = self.ceiling_fan.get_speed()
+
+    def undo(self):
+        match self.prev_speed:
+            case CeilingFanSpeed.HIGH:
+                self.ceiling_fan.high()
+            case CeilingFanSpeed.MEDIUM:
+                self.ceiling_fan.medium()
+            case CeilingFanSpeed.LOW:
+                self.ceiling_fan.low()
+            case CeilingFanSpeed.OFF:
+                self.ceiling_fan.off()
+
+
+class CeilingFanHighCommand(Command):
+    def execute(self) -> None:
+        super().execute()
+        self.ceiling_fan.high()
+
+
+class CeilingFanMediumCommand(Command):
+    def execute(self) -> None:
+        super().execute()
+        self.ceiling_fan.medium()
+
+
+class CeilingFanLowCommand(Command):
+    def execute(self) -> None:
+        super().execute()
+        self.ceiling_fan.low()
+
+
+class CeilingFanOffCommand(Command):
+    def execute(self) -> None:
+        super().execute()
+        self.ceiling_fan.off()
