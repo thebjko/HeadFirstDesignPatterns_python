@@ -40,25 +40,34 @@ class RemoteControl:
                 '    ',
                 self.off_commands[i].__class__.__name__,
             ]
-            ls.append(''.join(x))
+            ls.append(' '.join(x))
         return '\n'.join(ls)
-    
+
+
+class RemoteControlWithUndo(RemoteControl):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.undo_command = NoCommand()
+
+    def on_button_was_pushed(self, slot: int):
+        super().on_button_was_pushed(slot)
+        self.undo_command = self.on_commands[slot]
+
+    def off_button_was_pushed(self, slot: int):
+        super().off_button_was_pushed(slot)
+        self.undo_command = self.off_commands[slot]
+
+    def undo_button_was_pushed(self):
+        self.undo_command.undo()
+
+    def __str__(self):
+        return super().__str__() + '\nUndo Command : ' + self.undo_command.__class__.__name__
+
 
 if __name__ == '__main__':
-    # light = Light()
-    # light_on = LightOnCommand(light)
 
-    # door = GarageDoor()
-    # garage_open = GarageDoorOpenCommand(door)
-
-    # rc = SimpleRemoteControl()
-    # rc.slot = light_on
-    # rc.button_was_pressed()
-
-    # rc.slot = garage_open   # 종업원?
-    # rc.button_was_pressed()
-
-    remote_control = RemoteControl()
+    remote_control = RemoteControlWithUndo()
 
     living_room_light = Light('Living Room')
     kitchen_light = Light('Kitchen Light')
@@ -78,17 +87,14 @@ if __name__ == '__main__':
     stereo_off_with_CD = StereoOffWithCDCommand(stereo)
 
     remote_control.set_commands(0, living_room_light_on, living_room_light_off)
-    remote_control.set_commands(1, kitchen_light_on, kitchen_light_off)
-    remote_control.set_commands(2, stereo_on_with_CD, stereo_off_with_CD)
-    remote_control.set_commands(3, garage_door_up, garage_door_down)
 
     print(remote_control)
 
     remote_control.on_button_was_pushed(0)
     remote_control.off_button_was_pushed(0)
-    remote_control.on_button_was_pushed(1)
-    remote_control.off_button_was_pushed(1)
-    remote_control.on_button_was_pushed(2)
-    remote_control.off_button_was_pushed(2)
-    remote_control.on_button_was_pushed(3)
-    remote_control.off_button_was_pushed(3)
+    print(remote_control)
+    remote_control.undo_button_was_pushed()
+    remote_control.off_button_was_pushed(0)
+    remote_control.on_button_was_pushed(0)
+    print(remote_control)
+    remote_control.undo_button_was_pushed()

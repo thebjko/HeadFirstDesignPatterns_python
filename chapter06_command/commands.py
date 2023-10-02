@@ -22,6 +22,9 @@ class LightOnCommand(Command):
     def execute(self) -> None:
         self.light.on()
 
+    def undo(self) -> None:
+        self.light.off()
+
 
 class LightOffCommand(Command):
     '''concrete command'''
@@ -30,6 +33,9 @@ class LightOffCommand(Command):
 
     def execute(self) -> None:
         self.light.off()
+
+    def undo(self) -> None:
+        self.light.on()
 
 
 class GarageDoorOpenCommand(Command):
@@ -40,6 +46,9 @@ class GarageDoorOpenCommand(Command):
     def execute(self) -> None:
         self.door.up()
 
+    def undo(self) -> None:
+        self.door.down()
+
 class GarageDoorDownCommand(Command):
     def __init__(self, door: GarageDoor):
         self.door = door
@@ -47,6 +56,8 @@ class GarageDoorDownCommand(Command):
     def execute(self):
         self.door.down()
 
+    def undo(self) -> None:
+        self.door.up()
 
 class StereoOnWithCDCommand(Command):
     def __init__(self, stereo):
@@ -57,6 +68,11 @@ class StereoOnWithCDCommand(Command):
         self.stereo.set_CD()
         self.stereo.set_volume(11)
 
+    def undo(self):
+        self.stereo.set_volume(0)
+        self.stereo.set_CD()
+        self.stereo.off()
+
 
 class StereoOffWithCDCommand(Command):
     def __init__(self, stereo):
@@ -66,8 +82,16 @@ class StereoOffWithCDCommand(Command):
         self.stereo.set_volume(0)
         self.stereo.set_CD()
         self.stereo.off()
+    
+    def undo(self):
+        self.stereo.on()
+        self.stereo.set_CD()
+        self.stereo.set_volume(11)
 
 class NoCommand:
     '''?'''
     def execute(self):
         print('no commands on this slot')
+
+    def undo(self):
+        pass
