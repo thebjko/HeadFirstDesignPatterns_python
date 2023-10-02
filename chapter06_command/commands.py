@@ -193,6 +193,6 @@ class MacroCommand(Command):
             command.execute()
 
     def undo(self):
-        for command in self.commands:
+        for command in reversed(self.commands):
             command.undo()
 
