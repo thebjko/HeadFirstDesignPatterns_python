@@ -69,32 +69,20 @@ if __name__ == '__main__':
 
     remote_control = RemoteControlWithUndo()
 
-    living_room_light = Light('Living Room')
-    kitchen_light = Light('Kitchen Light')
-    garage_door = GarageDoor('Garage Door')
-    stereo = Stereo('Living Room')
+    ceiling_fan = CeilingFan('Living Room')
 
-    living_room_light_on = LightOnCommand(living_room_light)
-    living_room_light_off = LightOffCommand(living_room_light)
+    ceiling_fan_medium = CeilingFanMediumCommand(ceiling_fan)
+    ceiling_fan_high = CeilingFanHighCommand(ceiling_fan)
+    ceiling_fan_off = CeilingFanOffCommand(ceiling_fan)
 
-    kitchen_light_on = LightOnCommand(kitchen_light)
-    kitchen_light_off = LightOffCommand(kitchen_light)
-
-    garage_door_up = GarageDoorOpenCommand(garage_door)
-    garage_door_down = GarageDoorDownCommand(garage_door)
-
-    stereo_on_with_CD = StereoOnWithCDCommand(stereo)
-    stereo_off_with_CD = StereoOffWithCDCommand(stereo)
-
-    remote_control.set_commands(0, living_room_light_on, living_room_light_off)
-
-    print(remote_control)
+    remote_control.set_commands(0, ceiling_fan_medium, ceiling_fan_off)
+    remote_control.set_commands(1, ceiling_fan_high, ceiling_fan_off)
 
     remote_control.on_button_was_pushed(0)
     remote_control.off_button_was_pushed(0)
     print(remote_control)
     remote_control.undo_button_was_pushed()
-    remote_control.off_button_was_pushed(0)
-    remote_control.on_button_was_pushed(0)
+
+    remote_control.on_button_was_pushed(1)
     print(remote_control)
     remote_control.undo_button_was_pushed()
