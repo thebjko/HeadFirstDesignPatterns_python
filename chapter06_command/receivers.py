@@ -8,15 +8,19 @@ class CeilingFan:
 
     def high(self):
         self.speed = CeilingFanSpeed.HIGH
+        print('선풍기 속도가 높음으로 설정되었습니다.')
 
     def medium(self):
         self.speed = CeilingFanSpeed.MEDIUM
+        print('선풍기 속도가 중간으로 설정되었습니다.')
 
     def low(self):
         self.speed = CeilingFanSpeed.LOW
+        print('선풍기 속도가 낮음으로 설정되었습니다.')
 
     def off(self):
         self.speed = CeilingFanSpeed.OFF
+        print('선풍기가 꺼졌습니다.')
 
     def get_speed(self):
         return self.speed
