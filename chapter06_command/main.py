@@ -69,20 +69,27 @@ if __name__ == '__main__':
 
     remote_control = RemoteControlWithUndo()
 
-    ceiling_fan = CeilingFan('Living Room')
+    light = Light('Living Room')
+    stereo = Stereo('Living Room')
+    tv = TV('Living Room')
+    hottub = Hottub()
 
-    ceiling_fan_medium = CeilingFanMediumCommand(ceiling_fan)
-    ceiling_fan_high = CeilingFanHighCommand(ceiling_fan)
-    ceiling_fan_off = CeilingFanOffCommand(ceiling_fan)
+    light_on = LightOnCommand(light)
+    light_off = LightOffCommand(light)
+    tv_on = TVOnCommand(tv)
+    tv_off = TVOffCommand(tv)
+    hottub_on = HottubOnCommand(hottub)
+    hottub_off = HottubOffCommand(hottub)
+    stereo_on = StereoOnWithCDCommand(stereo)
+    stereo_off = StereoOffWithCDCommand(stereo)
 
-    remote_control.set_commands(0, ceiling_fan_medium, ceiling_fan_off)
-    remote_control.set_commands(1, ceiling_fan_high, ceiling_fan_off)
+    party_on = [light_on, tv_on, hottub_on, stereo_on]
+    party_off = [light_off, tv_off, hottub_off, stereo_off]
 
+    party_on_macro = MacroCommand(party_on)
+    party_off_macro = MacroCommand(party_off)
+
+    remote_control.set_commands(0, party_on_macro, party_off_macro)
     remote_control.on_button_was_pushed(0)
     remote_control.off_button_was_pushed(0)
-    print(remote_control)
-    remote_control.undo_button_was_pushed()
-
-    remote_control.on_button_was_pushed(1)
-    print(remote_control)
     remote_control.undo_button_was_pushed()

@@ -72,3 +72,22 @@ class Stereo:
 
     def set_volume(self, val: int):
         print(f'volume is set to {val}')
+
+
+class TV:
+    def __init__(self, desc: str):
+        self.description = desc
+    
+    def on(self):
+        print('TV is on')
+    
+    def off(self):
+        print('TV is off')
+
+
+class Hottub:
+    def on(self):
+        print('Hottub is on')
+    
+    def off(self):
+        print('Hottub is off')

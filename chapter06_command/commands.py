@@ -138,3 +138,61 @@ class CeilingFanOffCommand(CeilingFanCommand):
     def execute(self) -> None:
         super().execute()
         self.ceiling_fan.off()
+
+
+class TVOnCommand(Command):
+    def __init__(self, tv) -> None:
+        self.tv = tv
+
+    def execute(self) -> None:
+        self.tv.on()
+    
+    def undo(self):
+        self.tv.off()
+
+
+class TVOffCommand(Command):
+    def __init__(self, tv) -> None:
+        self.tv = tv
+
+    def execute(self) -> None:
+        self.tv.off()
+    
+    def undo(self):
+        self.tv.on()
+
+
+class HottubOnCommand(Command):
+    def __init__(self, hottub) -> None:
+        self.hottub = hottub
+
+    def execute(self) -> None:
+        self.hottub.on()
+
+    def undo(self):
+        self.hottub.off()
+
+
+class HottubOffCommand(Command):
+    def __init__(self, hottub) -> None:
+        self.hottub = hottub
+
+    def execute(self) -> None:
+        self.hottub.off()
+
+    def undo(self):
+        self.hottub.on()
+
+
+class MacroCommand(Command):
+    def __init__(self, commands: list[Command]):
+        self.commands = commands
+
+    def execute(self):
+        for command in self.commands:
+            command.execute()
+
+    def undo(self):
+        for command in self.commands:
+            command.undo()
+
