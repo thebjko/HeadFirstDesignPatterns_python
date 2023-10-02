@@ -116,25 +116,25 @@ class CeilingFanCommand(Command):
                 self.ceiling_fan.off()
 
 
-class CeilingFanHighCommand(Command):
+class CeilingFanHighCommand(CeilingFanCommand):
     def execute(self) -> None:
         super().execute()
         self.ceiling_fan.high()
 
 
-class CeilingFanMediumCommand(Command):
+class CeilingFanMediumCommand(CeilingFanCommand):
     def execute(self) -> None:
         super().execute()
         self.ceiling_fan.medium()
 
 
-class CeilingFanLowCommand(Command):
+class CeilingFanLowCommand(CeilingFanCommand):
     def execute(self) -> None:
         super().execute()
         self.ceiling_fan.low()
 
 
-class CeilingFanOffCommand(Command):
+class CeilingFanOffCommand(CeilingFanCommand):
     def execute(self) -> None:
         super().execute()
         self.ceiling_fan.off()
