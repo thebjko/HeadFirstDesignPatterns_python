@@ -1,3 +1,27 @@
+from enums import *
+
+
+class CeilingFan:
+    def __init__(self, location: str):
+        self.location = location
+        self.speed = CeilingFanSpeed.OFF
+
+    def high(self):
+        self.speed = CeilingFanSpeed.HIGH
+
+    def medium(self):
+        self.speed = CeilingFanSpeed.MEDIUM
+
+    def low(self):
+        self.speed = CeilingFanSpeed.LOW
+
+    def off(self):
+        self.speed = CeilingFanSpeed.OFF
+
+    def get_speed(self):
+        return self.speed
+
+
 class Light:
     def __init__(self, desc: str):
         self.description = desc
