@@ -49,23 +49,47 @@ class TurkeyAdapter(Duck):
             self.turkey.fly()
 
 
+from random import randint
+
+class DuckAdapter(Turkey, MallardDuck):
+    '''Class adapter'''
+    def gobble(self):
+        self.quack()
+    
+    def fly(self):
+        if randint(0, 4) == 0:
+            MallardDuck.fly(self)
+
+
+class DuckAdapter(MallardDuck, Turkey):
+    '''Class adapter'''
+    def gobble(self):
+        self.quack()
+    
+    def fly(self):
+        if randint(0, 4) == 0:
+            super().fly()
+
+
 if __name__ == '__main__':
-    duck = MallardDuck()
-    turkey = WildTurkey()
+    # duck = MallardDuck()
+    # turkey = WildTurkey()
 
-    turkey_adapter = TurkeyAdapter(turkey)
+    # turkey_adapter = TurkeyAdapter(turkey)
 
-    turkey.gobble()
-    turkey.fly()
+    # turkey.gobble()
+    # turkey.fly()
 
-    def test_duck(duck: Duck):
-        duck.quack()
-        duck.fly()
+    # def test_duck(duck: Duck):
+    #     duck.quack()
+    #     duck.fly()
 
-    print('Test Duck')
-    test_duck(duck)
+    # print('Test Duck')
+    # test_duck(duck)
 
-    print('Test TurkeyAdapter')
-    test_duck(turkey_adapter)
+    # print('Test TurkeyAdapter')
+    # test_duck(turkey_adapter)
 
-
+    duck_adapter = DuckAdapter()
+    duck_adapter.gobble()
+    duck_adapter.fly()
