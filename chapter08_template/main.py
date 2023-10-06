@@ -4,7 +4,10 @@ from abc import ABCMeta, abstractmethod
 class CaffeineBeverage(metaclass=ABCMeta):
     @abstractmethod
     def prepare_recipe(self):
-        pass
+        self.boil_water()
+        self.brew()
+        self.pour_in_cup()
+        self.add_condiments()
 
     def boil_water(self):
         print('boiling water')
@@ -16,7 +19,7 @@ class CaffeineBeverage(metaclass=ABCMeta):
 
 class Coffee(CaffeineBeverage):
     def prepare_recipe(self):
-        pass
+        super().prepare_recipe()
 
     def brew_coffee_grinds(self):
         pass
@@ -27,7 +30,7 @@ class Coffee(CaffeineBeverage):
 
 class Tea(CaffeineBeverage):
     def prepare_recipe(self):
-        return super().prepare_recipe()
+        super().prepare_recipe()
     
     def steep_tea_bag(self):
         pass
@@ -39,5 +42,5 @@ class Tea(CaffeineBeverage):
 if __name__ == '__main__':
     c = Coffee()
     c.boil_water()
-    # c.pour_in_cup()
+    c.prepare_recipe()
 
