@@ -29,9 +29,7 @@ class CaffeineBeverage(metaclass=ABCMeta):
         return True
 
 
-class Coffee(CaffeineBeverage):
-    def __init__(self, condiment=True) -> None:
-        self.condiments_flag = condiment
+class CoffeeWithHook(CaffeineBeverage):
 
     def brew(self):
         print('brewing coffee')
@@ -40,7 +38,11 @@ class Coffee(CaffeineBeverage):
         print('adding sugar and milk')
 
     def customer_wants_condiments(self):
-        return self.condiments_flag
+        answer = input('커피에 우유와 설탕을 넣을까요? [y/n] ')
+
+        if answer.startswith('y'):
+            return True
+        return False
 
 
 class Tea(CaffeineBeverage):
@@ -53,7 +55,7 @@ class Tea(CaffeineBeverage):
 
 
 if __name__ == '__main__':
-    c = Coffee(condiment=False)
+    c = CoffeeWithHook()
     c.prepare_recipe()
 
     t = Tea()
