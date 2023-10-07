@@ -7,7 +7,8 @@ class CaffeineBeverage(metaclass=ABCMeta):
         self.boil_water()
         self.brew()
         self.pour_in_cup()
-        self.add_condiments()
+        if self.customer_wants_condiments():
+            self.add_condiments()
 
     @abstractmethod
     def brew(self):
@@ -23,15 +24,23 @@ class CaffeineBeverage(metaclass=ABCMeta):
     def pour_in_cup(self):
         print('pouring beverage')
 
+    def customer_wants_condiments(self):
+        '''hook'''
+        return True
 
 
 class Coffee(CaffeineBeverage):
+    def __init__(self, condiment=True) -> None:
+        self.condiments_flag = condiment
 
     def brew(self):
         print('brewing coffee')
 
     def add_condiments(self):
         print('adding sugar and milk')
+
+    def customer_wants_condiments(self):
+        return self.condiments_flag
 
 
 class Tea(CaffeineBeverage):
@@ -44,7 +53,7 @@ class Tea(CaffeineBeverage):
 
 
 if __name__ == '__main__':
-    c = Coffee()
+    c = Coffee(condiment=False)
     c.prepare_recipe()
 
     t = Tea()
