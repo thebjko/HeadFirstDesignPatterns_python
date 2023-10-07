@@ -45,7 +45,7 @@ class CoffeeWithHook(CaffeineBeverage):
         return False
 
 
-class Tea(CaffeineBeverage):
+class TeaWithHook(CaffeineBeverage):
 
     def brew(self):
         print('brewing tea')
@@ -53,10 +53,17 @@ class Tea(CaffeineBeverage):
     def add_condiments(self):
         print('adding lemon')
 
+    def customer_wants_condiments(self):
+        answer = input('홍차에 레몬을 넣을까요? [y/n] ')
+
+        if answer.startswith('y'):
+            return True
+        return False
+
 
 if __name__ == '__main__':
     c = CoffeeWithHook()
     c.prepare_recipe()
 
-    t = Tea()
+    t = TeaWithHook()
     t.prepare_recipe()
