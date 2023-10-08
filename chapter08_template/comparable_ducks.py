@@ -7,10 +7,12 @@ class ComparableDuck:
         return f'{self.name} weight: {self.weight}'
 
     def __lt__(self, other):
+        if self.weight == other.weight:
+            return self.name < other.name
         return self.weight < other.weight
 
-    def __le__(self, other):
-        return self.weight <= other.weight
+    # def __le__(self, other):
+    #     return self.weight <= other.weight
 
 
 if __name__ == '__main__':
