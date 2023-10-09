@@ -52,6 +52,58 @@ class PancakeHouseMenu:
         self.menu_items.append(menu_item)
 
 
+class MockArray(list):
+    def __init__(self, max_items: int):
+        super().__init__()
+        self.MAX_ITEMS = max_items
+
+    def append(self, item):
+        if len(self) < self.MAX_ITEMS:
+            super().append(item)
+        else:
+            raise Exception("Capacity exceded. Can't add more item.")
+
+
+class DinerMenu:
+    def __init__(self):
+        self.menu_items = MockArray(6)
+    
+        self.add_item(
+            'Vegetarian BLT',
+            'Whole wheat, Bean Meat Bacon, Lettuce, Tomato',
+            True,
+            2.99    
+        )
+    
+        self.add_item(
+            'BLT',
+            'Whole wheat, Bacon, Lettuce, Tomato',
+            False,
+            2.99
+        )
+            
+        self.add_item(
+            'Today\'s Soup',
+            'Today\'s Soup with Potato Salad',
+            False,
+            3.29
+        )
+    
+        self.add_item(
+            'Hot Dog',
+            'Sourcraut, Spices, Onion, Cheese',
+            False,
+            3.05    
+        )
+
+    def add_item(self, name, description, vegetarian, price):
+        menu_item = MenuItem(name, description, vegetarian, price)
+        self.menu_items.append(menu_item)
+    
+
 if __name__ == '__main__':
     p = PancakeHouseMenu()
     print(p.menu_items)
+
+    d = DinerMenu()
+    print(d.menu_items)
