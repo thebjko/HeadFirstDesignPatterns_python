@@ -1,3 +1,6 @@
+from iterators import DinerMenuIterator
+
+
 class MenuItem:
     def __init__(
         self,
@@ -88,6 +91,9 @@ class DinerMenu:
         menu_item = MenuItem(name, description, vegetarian, price)
         self.menu_items.update({len(self.menu_items): menu_item})
     
+    def create_iterator(self):
+        return DinerMenuIterator(self.menu_items)
+
 
 if __name__ == '__main__':
     pancakehouse_menu = PancakeHouseMenu()
