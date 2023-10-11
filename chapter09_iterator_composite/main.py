@@ -1,4 +1,4 @@
-from iterators import DinerMenuIterator
+from iterators import DinerMenuIterator, PythonicIterator
 
 
 class MenuItem:
@@ -92,7 +92,7 @@ class DinerMenu:
         self.menu_items.update({len(self.menu_items): menu_item})
     
     def create_iterator(self):
-        return DinerMenuIterator(self.menu_items)
+        return PythonicIterator(self.menu_items)
 
 
 if __name__ == '__main__':
