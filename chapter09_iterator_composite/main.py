@@ -1,4 +1,4 @@
-from iterators import DinerMenuIterator, PythonicIterator
+from waitress import PythonicIterator, Waitress
 
 
 class MenuItem:
@@ -54,6 +54,9 @@ class PancakeHouseMenu:
         menu_item = MenuItem(name, description, vegetarian, price)
         self.menu_items.append(menu_item)
 
+    def create_iterator(self):
+        return PythonicIterator(self.menu_items)
+
 
 class DinerMenu:
     def __init__(self):
@@ -97,7 +100,7 @@ class DinerMenu:
 
 if __name__ == '__main__':
     pancakehouse_menu = PancakeHouseMenu()
-    breakfast_items = pancakehouse_menu.menu_items
-
     diner_menu = DinerMenu()
-    lunch_items = diner_menu.menu_items
+
+    waitress = Waitress(pancakehouse_menu, diner_menu)
+    waitress.print_menu()
