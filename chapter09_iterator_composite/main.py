@@ -1,6 +1,3 @@
-from utils import MockArray
-
-
 class MenuItem:
     def __init__(
         self,
@@ -57,7 +54,7 @@ class PancakeHouseMenu:
 
 class DinerMenu:
     def __init__(self):
-        self.menu_items = MockArray(6)
+        self.menu_items = {}
     
         self.add_item(
             'Vegetarian BLT',
@@ -89,12 +86,12 @@ class DinerMenu:
 
     def add_item(self, name, description, vegetarian, price):
         menu_item = MenuItem(name, description, vegetarian, price)
-        self.menu_items.append(menu_item)
+        self.menu_items.update({len(self.menu_items): menu_item})
     
 
 if __name__ == '__main__':
-    p = PancakeHouseMenu()
-    print(p.menu_items)
+    pancakehouse_menu = PancakeHouseMenu()
+    breakfast_items = pancakehouse_menu.menu_items
 
-    d = DinerMenu()
-    print(d.menu_items)
+    diner_menu = DinerMenu()
+    lunch_items = diner_menu.menu_items
