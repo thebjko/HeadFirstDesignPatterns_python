@@ -41,7 +41,7 @@ class PythonicIterator:
         return self
 
     def __next__(self):
-        if self.items and self.position < len(self.items):
+        if self.position < len(self.items):
             item = self.items[self.position]
             self.position += 1
             return item
@@ -56,7 +56,7 @@ class PythonicIterator:
 
 
 if __name__ == '__main__':
-    it = PythonicIterator([1,2,3])
+    it = PythonicIterator([])
     print(next(it))
     print(it.has_next())
     print(next(it))
