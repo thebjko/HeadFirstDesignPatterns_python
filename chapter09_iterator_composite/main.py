@@ -1,4 +1,5 @@
-from waitress import PythonicIterator, Waitress
+from wtrs import Waitress
+from iterators import PythonicIterator
 
 
 class MenuItem:
