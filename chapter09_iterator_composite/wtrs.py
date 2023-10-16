@@ -1,6 +1,3 @@
-from iterators import PythonicIterator
-
-
 class Waitress:
     def __init__(self, pancakehouse_menu, diner_menu):
         self.pancakehouse_menu = pancakehouse_menu
