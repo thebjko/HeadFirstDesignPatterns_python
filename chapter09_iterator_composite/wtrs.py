@@ -16,6 +16,9 @@ class Waitress:
         self._print_menu(diner_iterator)
 
     def _print_menu(self, iterator):
-        while iterator.has_next():
-            menu_item = next(iterator)
+        for menu_item in iterator:
             print(f'{menu_item.name}, {menu_item.price} -- {menu_item.description}')
+            
+        # while iterator.has_next():
+        #     menu_item = next(iterator)
+        #     print(f'{menu_item.name}, {menu_item.price} -- {menu_item.description}')
