@@ -1,6 +1,11 @@
 from wtrs import Waitress
 from iterators import PythonicIterator
 
+'''
+For now, both restaurants use same iterator.
+However, when needed, they can use different iterator with
+same interface.
+'''
 
 class MenuItem:
     def __init__(
