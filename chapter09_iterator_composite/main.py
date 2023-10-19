@@ -1,5 +1,7 @@
 from wtrs import Waitress
 from iterators import PythonicIterator
+from abc import ABC, abstractmethod
+
 
 '''
 For now, both restaurants use same iterator.
@@ -24,7 +26,14 @@ class MenuItem:
         return self.name
 
 
-class PancakeHouseMenu:
+class Menu(ABC):
+    '''<< interface >>'''
+    @abstractmethod
+    def create_iterator(self):
+        pass
+
+
+class PancakeHouseMenu(Menu):
     def __init__(self):
         self.menu_items = []
 
@@ -64,7 +73,7 @@ class PancakeHouseMenu:
         return PythonicIterator(self.menu_items)
 
 
-class DinerMenu:
+class DinerMenu(Menu):
     def __init__(self):
         self.menu_items = {}
     
