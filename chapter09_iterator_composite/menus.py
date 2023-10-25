@@ -31,7 +31,31 @@ class MenuItem(MenuComponent):
         print("     -- " + self.description)
 
 
-class Menu:
+class Menu(MenuComponent):
+    menu_components: list[MenuComponent] = []
+    name: str
+    description: str
+
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
+
+    def add(self, menu_component: MenuComponent):
+        self.menu_components.append(menu_component)
+
+    def remove(self, menu_component: MenuComponent):
+        self.menu_components.remove(menu_component)
+
+    def get_child(self, i: int):
+        return self.menu_components[i]
+    
+    def print(self):
+        print('\n' + self.name + ", " + self.description)
+        print('--------------------')
+
+        for menu_component in self.menu_components:
+            menu_component.print()
+
     def __iter__(self):
         raise NotImplementedError
 
