@@ -13,7 +13,7 @@ class MenuComponent:
         raise NotImplementedError
 
 
-class MenuItem:
+class MenuItem(MenuComponent):
     def __init__(
         self,
         name: str,
@@ -25,6 +25,10 @@ class MenuItem:
         self.description = description
         self.vegetarian = vegetarian
         self.price = price
+
+    def print(self):
+        print(" " + self.name + "(v)" * self.vegetarian + ", " + self.price)
+        print("     -- " + self.description)
 
 
 class Menu:
