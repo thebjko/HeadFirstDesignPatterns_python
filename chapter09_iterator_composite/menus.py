@@ -1,4 +1,16 @@
 # package headfirst.designpatterns.iterator.dinermergercafe
+class MenuComponent:
+    def add(self, menu_component):
+        raise NotImplementedError
+
+    def remove(self, menu_component):
+        raise NotImplementedError
+    
+    def get_child(self, i: int):
+        raise NotImplementedError
+    
+    def print(self):
+        raise NotImplementedError
 
 
 class MenuItem:

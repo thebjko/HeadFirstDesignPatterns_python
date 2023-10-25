@@ -113,6 +113,10 @@ class DinerMenu(Menu):
         return PythonicIterator(self.menu_items)
 
 
+class CafeMenu(Menu):
+    pass
+
+
 if __name__ == '__main__':
     pancakehouse_menu = PancakeHouseMenu()
     diner_menu = DinerMenu()
