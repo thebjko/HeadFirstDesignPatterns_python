@@ -55,7 +55,6 @@ class Menu(MenuComponent):
         print('--------------------')
 
         for menu_component in self.menu_components:
-            # print(type(menu_component))
             menu_component.print()
 
     def __iter__(self):
@@ -159,8 +158,8 @@ def menu_test_drive():
         )
     )
     cafe_menu.print()
-    # waitress = Waitress(all_menus)
-    # waitress.print_menu()
+    waitress = Waitress(all_menus)
+    waitress.print_menu()
     # print("\nCustomer asks, is the Hotdog vegetarian?")
     # print("Waitress says: ", end="")
     # if waitress.is_item_vegetarian("Hotdog"):
