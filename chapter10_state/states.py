@@ -18,3 +18,74 @@ class State(ABC):
     @abstractmethod
     def dispense(self):
         pass
+
+
+class SoldState(State):
+    def insert_quarter(self):
+        return
+
+    def eject_quarter(self):
+        return
+
+    def trun_crank(self):
+        return
+
+    def dispense(self):
+        return
+
+
+class SoldOutState(State):
+    def insert_quarter(self):
+        return
+
+    def eject_quarter(self):
+        return
+
+    def trun_crank(self):
+        return
+
+    def dispense(self):
+        return
+
+
+class NoQuarterState(State):
+    def insert_quarter(self):
+        return
+
+    def eject_quarter(self):
+        return
+
+    def trun_crank(self):
+        return
+
+    def dispense(self):
+        return
+
+
+class HasQuarterState(State):
+    def insert_quarter(self):
+        return
+
+    def eject_quarter(self):
+        return
+
+    def trun_crank(self):
+        return
+
+    def dispense(self):
+        return
+
+
+
+class WinnerState(State):
+    def insert_quarter(self):
+        return
+
+    def eject_quarter(self):
+        return
+
+    def trun_crank(self):
+        return
+
+    def dispense(self):
+        return
