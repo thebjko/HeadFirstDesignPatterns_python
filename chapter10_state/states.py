@@ -49,17 +49,21 @@ class SoldOutState(State):
 
 
 class NoQuarterState(State):
+    def __init__(self, gumball_machine):
+        self.gumball_machine = gumball_machine
+
     def insert_quarter(self):
-        return
+        print("동전을 넣으셨습니다.")
+        self.gumball_machine.state = self.has_quarter_state
 
     def eject_quarter(self):
-        return
+        print("동전을 넣어주세요.")
 
     def trun_crank(self):
-        return
+        print("동전을 넣어주세요.")
 
     def dispense(self):
-        return
+        print("동전을 넣어주세요.")
 
 
 class HasQuarterState(State):
