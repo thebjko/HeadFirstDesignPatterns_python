@@ -25,16 +25,21 @@ class State(ABC):
 
 class SoldState(State):
     def insert_quarter(self):
-        return
+        print("알맹이를 내보내고 있습니다.")
 
     def eject_quarter(self):
-        return
+        print("이미 알맹이를 뽑으셨습니다.")
 
     def trun_crank(self):
-        return
+        print("손잡이는 한 번만 돌려주세요.")
 
     def dispense(self):
-        return
+        self.gumball_machine.release_ball()
+        if self.gumball_machine.count > 0:
+            self.gumball_machine.state = self.gumball_machine.no_quarter_state
+        else:
+            print("Oops, out of gumballs!")
+            self.gumball_machine.state = self.gumball_machine.sold_out_state
 
 
 class SoldOutState(State):
