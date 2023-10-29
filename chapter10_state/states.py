@@ -3,6 +3,9 @@ from abc import ABC, abstractmethod
 
 class State(ABC):
     """<< Interface >>"""
+    def __init__(self, gumball_machine):
+        self.gumball_machine = gumball_machine
+
     @abstractmethod
     def insert_quarter(self):
         pass
@@ -49,8 +52,8 @@ class SoldOutState(State):
 
 
 class NoQuarterState(State):
-    def __init__(self, gumball_machine):
-        self.gumball_machine = gumball_machine
+    # def __init__(self, gumball_machine):
+    #     self.gumball_machine = gumball_machine
 
     def insert_quarter(self):
         print("동전을 넣으셨습니다.")
@@ -67,8 +70,8 @@ class NoQuarterState(State):
 
 
 class HasQuarterState(State):
-    def __init__(self, gumball_machine):
-        self.gumball_machine = gumball_machine
+    # def __init__(self, gumball_machine):
+    #     self.gumball_machine = gumball_machine
 
     def insert_quarter(self):
         print("동전인 한 개만 넣어주세요.")
