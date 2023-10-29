@@ -62,7 +62,7 @@ class NoQuarterState(State):
 
     def insert_quarter(self):
         print("동전을 넣으셨습니다.")
-        self.gumball_machine.state = self.has_quarter_state
+        self.gumball_machine.state = self.gumball_machine.has_quarter_state
 
     def eject_quarter(self):
         print("동전을 넣어주세요.")
