@@ -1,16 +1,7 @@
-from enum import Enum
 from states import *
-
-class State(Enum):
-    SOLD_OUT = 0
-    NO_QUARTER = 1
-    HAS_QUARTER = 2
-    SOLD = 3
 
 
 class GumballMachine:
-    state = State.SOLD_OUT
-
     def __init__(self, number_gumballs):
         self.sold_out_state = SoldOutState(self)
         self.no_quarter_state = NoQuarterState(self)
