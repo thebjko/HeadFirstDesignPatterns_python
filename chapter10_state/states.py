@@ -44,16 +44,16 @@ class SoldState(State):
 
 class SoldOutState(State):
     def insert_quarter(self):
-        return
+        print("sold out")
 
     def eject_quarter(self):
-        return
+        print("sold out")
 
     def trun_crank(self):
-        return
+        print("sold out")
 
     def dispense(self):
-        return
+        print("sold out")
 
 
 class NoQuarterState(State):
