@@ -32,7 +32,7 @@ class GumballMachine:
             self.count -= 1
 
     def __str__(self):
-        return f"State: {self.state}"
+        return f"State: {self.state.__class__.__qualname__}"
 
 
 def gumball_machine_test_drive():
