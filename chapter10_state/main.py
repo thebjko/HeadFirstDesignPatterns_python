@@ -1,5 +1,5 @@
 from enum import Enum
-
+from states import *
 
 class State(Enum):
     SOLD_OUT = 0
@@ -11,67 +11,38 @@ class State(Enum):
 class GumballMachine:
     state = State.SOLD_OUT
 
-    def __init__(self, count):
-        self.count = count
-        if self.count > 0:
-            self.state = State.NO_QUARTER
+    def __init__(self, number_gumballs):
+        self.sold_out_state = SoldOutState(self)
+        self.no_quarter_state = NoQuarterState(self)
+        self.has_quarter_state = HasQuarterState(self)
+        self.sold_state = SoldState(self)
+
+        self.count = number_gumballs
+        if number_gumballs > 0:
+            self.state = self.no_quarter_state
+        else:
+            self.state = self.sold_out_state
 
     def insert_quarter(self):
-        match self.state:
-            case State.HAS_QUARTER:
-                print("동전은 한 개만 넣어 주세요.")
-            case State.NO_QUARTER:
-                self.state = State.HAS_QUARTER
-                print("동전을 넣으셨습니다.")
-            case State.SOLD_OUT:
-                print("매진되었습니다. 다음 기회에 이용해주세요.")
-            case State.SOLD:
-                print("알맹이를 내보내고 있습니다.")
+        self.state.insert_quarter()
     
     def eject_quarter(self):
-        match self.state:
-            case State.HAS_QUARTER:
-                print("동전이 반환됩니다.")
-                self.state = State.NO_QUARTER
-            case State.NO_QUARTER:
-                print("동전을 넣어주세요.")
-            case State.SOLD:
-                print("이미 알맹이를 뽑으셨습니다.")
-            case State.SOLD_OUT:
-                print("동전을 넣지 않으셨습니다. 동전이 반환되지 않습니다.")
+        self.state.eject_quarter()
     
     def turn_crank(self):
-        match self.state:
-            case State.SOLD:
-                print("손잡이는 한 번만 돌려주세요.")
-            case State.NO_QUARTER:
-                print("동전을 넣어 주세요.")
-            case State.SOLD_OUT:
-                print("매진되었습니다.")
-            case State.HAS_QUARTER:
-                print("손잡이를 돌리셨습니다.")
-                self.state = State.SOLD
-                self.dispense()
+        self.state.trun_crank()
 
     def dispense(self):
-        match self.state:
-            case State.SOLD:
-                print("알맹이를 내보내고 있습니다.")
-                self.count -= 1
-                if self.count == 0:
-                    print("더이상 알맹이가 없습니다.")
-                    self.state = State.SOLD_OUT
-                else:
-                    self.state = State.NO_QUARTER
-            case State.NO_QUARTER:
-                print("동전을 넣어주세요.")
-            case State.SOLD_OUT:
-                print("매진입니다.")
-            case State.HAS_QUARTER:
-                print("알맹이를 내보낼 수 있습니다.")
+        self.state.dispense()
+
+    def release_ball(self):
+        print("알맹이를 내보내고 있습니다.")
+        if self.count > 0:
+            self.count -= 1
 
     def __str__(self):
         return f"State: {self.state}"
+
 
 def gumball_machine_test_drive():
     gumball_machine = GumballMachine(5)
