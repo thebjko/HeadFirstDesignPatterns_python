@@ -23,8 +23,6 @@ class GumballMachine:
     
     def turn_crank(self):
         self.state.trun_crank()
-
-    def dispense(self):
         self.state.dispense()
 
     def release_ball(self):
