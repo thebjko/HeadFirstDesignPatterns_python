@@ -111,8 +111,8 @@ class WinnerState(State):
         if self.gumball_machine.count == 0:
             self.gumball_machine.state = self.gumball_machine.sold_out_state
         else:
-            self.gumball_machine.release_ball()
             print("축하드립니다! 알맹이를 하나 더 받을실 수 있습니다.")
+            self.gumball_machine.release_ball()
             if self.gumball_machine.count == 0:
                 print("더 이상 알맹이가 없습니다.")
                 self.gumball_machine.state = self.gumball_machine.sold_out_state
