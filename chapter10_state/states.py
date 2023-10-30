@@ -85,7 +85,7 @@ class HasQuarterState(State):
 
     def trun_crank(self):
         print("손잡이를 돌리셨습니다.")
-        winner = random.choice([1, 0], weights=[1, 9])
+        winner = random.choices([1, 0], weights=[1, 9])
         if winner and self.gumball_machine.count > 1:
             self.gumball_machine.state = self.gumball_machine.winner_state
         else:
