@@ -6,6 +6,7 @@ class GumballMachine:
         self.sold_out_state = SoldOutState(self)
         self.no_quarter_state = NoQuarterState(self)
         self.has_quarter_state = HasQuarterState(self)
+        self.winner_state = WinnerState(self)
         self.sold_state = SoldState(self)
 
         self.count = number_gumballs

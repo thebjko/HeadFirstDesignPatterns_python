@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import random
 
 
 class State(ABC):
@@ -75,9 +76,6 @@ class NoQuarterState(State):
 
 
 class HasQuarterState(State):
-    # def __init__(self, gumball_machine):
-    #     self.gumball_machine = gumball_machine
-
     def insert_quarter(self):
         print("동전인 한 개만 넣어주세요.")
 
@@ -87,7 +85,11 @@ class HasQuarterState(State):
 
     def trun_crank(self):
         print("손잡이를 돌리셨습니다.")
-        self.gumball_machine.state = self.gumball_machine.sold_state
+        winner = random.choice([1, 0], weights=[1, 9])
+        if winner and self.gumball_machine.count > 1:
+            self.gumball_machine.state = self.gumball_machine.winner_state
+        else:
+            self.gumball_machine.state = self.gumball_machine.sold_state
 
     def dispense(self):
         print("알맹이를 내보낼 수 없습니다.")
