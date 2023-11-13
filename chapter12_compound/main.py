@@ -41,11 +41,27 @@ class GooseAdapter(Quackable):
         self.goose.honk()
 
 
+class QuackCounter(Quackable):
+    number_of_quacks = 0
+
+    def __init__(self, duck):
+        self.duck = duck  
+
+    def quack(self):
+        self.duck.quack()
+        self.counter()
+
+    @classmethod
+    def counter(cls):
+        cls.number_of_quacks += 1
+        
+    
+
 if __name__ == "__main__":
-    mallard_duck = MallardDuck()
-    redhead_duck = RedheadDuck()
-    duck_call = DuckCall()
-    rubber_duck = RubberDuck()
+    mallard_duck = QuackCounter(MallardDuck())
+    redhead_duck = QuackCounter(RedheadDuck())
+    duck_call = QuackCounter(DuckCall())
+    rubber_duck = QuackCounter(RubberDuck())
     goose_duck = GooseAdapter(Goose())
 
     print("오리 시뮬레이션 게임")
@@ -58,3 +74,5 @@ if __name__ == "__main__":
     simulate(duck_call)
     simulate(rubber_duck)
     simulate(goose_duck)
+
+    print("오리가 소리 낸 횟수 : {}번".format(QuackCounter.number_of_quacks))
