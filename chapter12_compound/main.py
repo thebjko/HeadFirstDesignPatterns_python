@@ -189,8 +189,6 @@ class Flock(Quackable):
             quacker.quack()
 
 
-
-
 class Observer(ABC):
     '''interface'''
     @abstractmethod
