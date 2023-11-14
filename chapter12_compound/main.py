@@ -1,7 +1,31 @@
 from abc import ABC, abstractmethod
 
 
-class Quackable(ABC):
+class QuackObservable(ABC):
+    '''interface'''
+    @abstractmethod
+    def register_observer(self, observer):
+        pass
+
+    @abstractmethod
+    def notify_observers(self):
+        pass
+
+
+class Observable(QuackObservable):
+    def __init__(self, duck):
+        self.observers = []
+        self.duck = duck
+
+    def register_observer(self, observer):
+        self.observers.append(observer)
+
+    def notify_observers(self):
+        for o in self.observers:
+            o.update(self.duck)
+
+
+class Quackable(QuackObservable):
     '''interface'''
     @abstractmethod
     def quack(self):
@@ -9,23 +33,47 @@ class Quackable(ABC):
 
 
 class MallardDuck(Quackable):
+    def __init__(self):
+        self.observable: Observable = Observable(self)
+
     def quack(self):
         print("꽥꽥")
+
+    def notify_observers(self):
+        self.observable.notify_observers()
 
 
 class RedheadDuck(Quackable):
+    def __init__(self):
+        self.observable: Observable = Observable(self)
+
     def quack(self):
         print("꽥꽥")
 
+    def notify_observers(self):
+        self.observable.notify_observers()
+
 
 class DuckCall(Quackable):
+    def __init__(self):
+        self.observable: Observable = Observable(self)
+
     def quack(self):
         print("꽉꽉")
 
+    def notify_observers(self):
+        self.observable.notify_observers()
+
 
 class RubberDuck(Quackable):
+    def __init__(self):
+        self.observable: Observable = Observable(self)
+
     def quack(self):
         print("삑삑")
+
+    def notify_observers(self):
+        self.observable.notify_observers()
 
 
 class Goose:
@@ -36,9 +84,13 @@ class Goose:
 class GooseAdapter(Quackable):
     def __init__(self, goose):
         self.goose = goose
-    
+        self.observable: Observable = Observable(self)
+
     def quack(self):
         self.goose.honk()
+
+    def notify_observers(self):
+        self.observable.notify_observers()
 
 
 class QuackCounter(Quackable):
@@ -54,7 +106,7 @@ class QuackCounter(Quackable):
     @classmethod
     def counter(cls):
         cls.number_of_quacks += 1
-        
+
 
 class AbstractDuckFactory(ABC):
     @abstractmethod
@@ -77,13 +129,13 @@ class AbstractDuckFactory(ABC):
 class DuckFactory(AbstractDuckFactory):
     def create_mallard_duck(self):
         return MallardDuck()
-    
+
     def create_redhead_duck(self):
         return RedheadDuck()
-    
+
     def create_duck_call(self):
         return DuckCall()
-    
+
     def create_rubber_duck(self):
         return RubberDuck()
 
@@ -91,13 +143,13 @@ class DuckFactory(AbstractDuckFactory):
 class CountingDuckFactory(AbstractDuckFactory):
     def create_mallard_duck(self):
         return QuackCounter(MallardDuck())
-    
+
     def create_redhead_duck(self):
         return QuackCounter(RedheadDuck())
-    
+
     def create_duck_call(self):
         return QuackCounter(DuckCall())
-    
+
     def create_rubber_duck(self):
         return QuackCounter(RubberDuck())
 
