@@ -66,7 +66,7 @@ class DuckCall(Quackable):
 
     def quack(self):
         print("꽉꽉")
-    
+
     def register_observer(self, observer):
         self.observable.register_observer(observer)
 
@@ -80,7 +80,7 @@ class RubberDuck(Quackable):
 
     def quack(self):
         print("삑삑")
-    
+
     def register_observer(self, observer):
         self.observable.register_observer(observer)
 
@@ -100,7 +100,7 @@ class GooseAdapter(Quackable):
 
     def quack(self):
         self.goose.honk()
-    
+
     def register_observer(self, observer):
         self.observable.register_observer(observer)
 
@@ -118,7 +118,7 @@ class QuackCounter(Quackable):
     def quack(self):
         self.duck.quack()
         self.counter()
-    
+
     def register_observer(self, observer):
         self.observable.register_observer(observer)
 
@@ -186,6 +186,18 @@ class Flock(Quackable):
     def quack(self):
         for quacker in self.quackers:
             quacker.quack()
+
+
+class Observer(ABC):
+    '''interface'''
+    @abstractmethod
+    def update(self, duck: QuackObservable):
+        pass
+
+
+class Quackologist(Observer):
+    def update(self, duck: QuackObservable):
+        print("꽥꽥학자 : {}가 방금 소리냈다.".format(duck))
 
 
 if __name__ == "__main__":
