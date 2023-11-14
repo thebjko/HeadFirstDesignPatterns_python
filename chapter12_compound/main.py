@@ -179,6 +179,7 @@ class CountingDuckFactory(AbstractDuckFactory):
 class Flock(Quackable):
     def __init__(self):
         self.quackers = []
+        self.observable: Observable = Observable(self)
 
     def add(self, quacker):
         self.quackers.append(quacker)
@@ -186,6 +187,8 @@ class Flock(Quackable):
     def quack(self):
         for quacker in self.quackers:
             quacker.quack()
+
+
 
 
 class Observer(ABC):
