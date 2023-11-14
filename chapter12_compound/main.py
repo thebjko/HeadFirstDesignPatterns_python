@@ -24,6 +24,9 @@ class Observable(QuackObservable):
         for o in self.observers:
             o.update(self.duck)
 
+    def __repr__(self):
+        return self.duck.__class__.__qualname__
+
 
 class Quackable(QuackObservable):
     '''interface'''
@@ -38,6 +41,7 @@ class MallardDuck(Quackable):
 
     def quack(self):
         print("꽥꽥")
+        self.notify_observers()
 
     def register_observer(self, observer):
         self.observable.register_observer(observer)
@@ -52,6 +56,7 @@ class RedheadDuck(Quackable):
 
     def quack(self):
         print("꽥꽥")
+        self.notify_observers()
 
     def register_observer(self, observer):
         self.observable.register_observer(observer)
@@ -66,6 +71,7 @@ class DuckCall(Quackable):
 
     def quack(self):
         print("꽉꽉")
+        self.notify_observers()
 
     def register_observer(self, observer):
         self.observable.register_observer(observer)
@@ -80,6 +86,7 @@ class RubberDuck(Quackable):
 
     def quack(self):
         print("삑삑")
+        self.notify_observers()
 
     def register_observer(self, observer):
         self.observable.register_observer(observer)
@@ -95,11 +102,11 @@ class Goose:
 
 class GooseAdapter(Quackable):
     def __init__(self, goose):
-        self.goose = goose
+        self.duck = goose
         self.observable: Observable = Observable(self)
 
     def quack(self):
-        self.goose.honk()
+        self.duck.honk()
 
     def register_observer(self, observer):
         self.observable.register_observer(observer)
@@ -179,23 +186,25 @@ class CountingDuckFactory(AbstractDuckFactory):
 class Flock(Quackable):
     def __init__(self):
         self.quackers = []
-        self.observables: list[Observable] = []
 
     def add(self, quacker):
         self.quackers.append(quacker)
-        self.observables.append(Observable(quacker))
 
     def quack(self):
         for quacker in self.quackers:
             quacker.quack()
 
     def register_observer(self, observer):
-        for d in self.observables:
-            d.register_observer(observer)
+        for d in self.quackers:
+            d.observable.register_observer(observer)
 
     def notify_observers(self):
-        for d in self.observables:
-            d.notify_observers()
+        for d in self.quackers:
+            d.observable.notify_observers()
+
+    @property
+    def observable(self):
+        return self
 
 
 class Observer(ABC):
@@ -218,7 +227,7 @@ if __name__ == "__main__":
     rubber_duck = duck_factory.create_rubber_duck()
     goose_duck = GooseAdapter(Goose())
 
-    print("오리 시뮬레이션 게임: 무리 (+컴포지트)")
+    # print("오리 시뮬레이션 게임: 무리 (+컴포지트)")
 
     flock_of_ducks = Flock()
 
@@ -243,16 +252,17 @@ if __name__ == "__main__":
     def simulate(duck):
         duck.quack()
 
-    print("오리 시뮬레이션 게임: 전체 무리")
-    simulate(flock_of_ducks)
+    # print("오리 시뮬레이션 게임: 전체 무리")
+    # simulate(flock_of_ducks)
 
-    print("오리 시뮬레이션 게임: 물오리 무리")
-    simulate(flock_of_mallards)
+    # print("오리 시뮬레이션 게임: 물오리 무리")
+    # simulate(flock_of_mallards)
 
-    print("오리가 소리 낸 횟수 : {}번".format(QuackCounter.number_of_quacks))
 
     quackologist = Quackologist()
     flock_of_ducks.register_observer(quackologist)
 
     print("오리 시뮬레이션 게임 + observer")
     simulate(flock_of_ducks)
+
+    print("오리가 소리 낸 횟수 : {}번".format(QuackCounter.number_of_quacks))
