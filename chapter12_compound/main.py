@@ -127,10 +127,10 @@ class QuackCounter(Quackable):
         self.counter()
 
     def register_observer(self, observer):
-        self.observable.register_observer(observer)
+        self.duck.register_observer(observer)
 
     def notify_observers(self):
-        self.observable.notify_observers()
+        self.duck.notify_observers()
 
     @classmethod
     def counter(cls):
