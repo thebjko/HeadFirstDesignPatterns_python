@@ -179,14 +179,23 @@ class CountingDuckFactory(AbstractDuckFactory):
 class Flock(Quackable):
     def __init__(self):
         self.quackers = []
-        self.observable: Observable = Observable(self)
+        self.observables: list[Observable] = []
 
     def add(self, quacker):
         self.quackers.append(quacker)
+        self.observables.append(Observable(quacker))
 
     def quack(self):
         for quacker in self.quackers:
             quacker.quack()
+
+    def register_observer(self, observer):
+        for d in self.observables:
+            d.register_observer(observer)
+
+    def notify_observers(self):
+        for d in self.observables:
+            d.notify_observers()
 
 
 class Observer(ABC):
@@ -241,3 +250,9 @@ if __name__ == "__main__":
     simulate(flock_of_mallards)
 
     print("오리가 소리 낸 횟수 : {}번".format(QuackCounter.number_of_quacks))
+
+    quackologist = Quackologist()
+    flock_of_ducks.register_observer(quackologist)
+
+    print("오리 시뮬레이션 게임 + observer")
+    simulate(flock_of_ducks)
