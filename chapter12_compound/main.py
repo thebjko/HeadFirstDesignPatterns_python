@@ -13,6 +13,10 @@ class QuackObservable(ABC):
 
 
 class Observable(QuackObservable):
+    '''
+    오리를 관찰가능하게 만들어주는 클래스
+    옵저버 기능을 캡슐화했다.
+    '''
     def __init__(self, duck):
         self.observers = []
         self.duck = duck
