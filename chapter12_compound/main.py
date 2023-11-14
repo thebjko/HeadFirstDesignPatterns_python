@@ -24,15 +24,15 @@ class Observable(QuackObservable):
         for o in self.observers:
             o.update(self.duck)
 
-    def __repr__(self):
-        return self.duck.__class__.__qualname__
-
 
 class Quackable(QuackObservable):
     '''interface'''
     @abstractmethod
     def quack(self):
         pass
+
+    def __repr__(self):
+        return self.__class__.__qualname__
 
 
 class MallardDuck(Quackable):
@@ -195,16 +195,12 @@ class Flock(Quackable):
             quacker.quack()
 
     def register_observer(self, observer):
-        for d in self.quackers:
-            d.observable.register_observer(observer)
+        for quacker in self.quackers:
+            quacker.register_observer(observer)
 
     def notify_observers(self):
-        for d in self.quackers:
-            d.observable.notify_observers()
-
-    @property
-    def observable(self):
-        return self
+        for quacker in self.quackers:
+            quacker.notify_observers()
 
 
 class Observer(ABC):
