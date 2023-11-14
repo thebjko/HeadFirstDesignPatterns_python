@@ -39,6 +39,9 @@ class MallardDuck(Quackable):
     def quack(self):
         print("꽥꽥")
 
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
+
     def notify_observers(self):
         self.observable.notify_observers()
 
@@ -50,6 +53,9 @@ class RedheadDuck(Quackable):
     def quack(self):
         print("꽥꽥")
 
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
+
     def notify_observers(self):
         self.observable.notify_observers()
 
@@ -60,6 +66,9 @@ class DuckCall(Quackable):
 
     def quack(self):
         print("꽉꽉")
+    
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
 
     def notify_observers(self):
         self.observable.notify_observers()
@@ -71,6 +80,9 @@ class RubberDuck(Quackable):
 
     def quack(self):
         print("삑삑")
+    
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
 
     def notify_observers(self):
         self.observable.notify_observers()
@@ -88,6 +100,9 @@ class GooseAdapter(Quackable):
 
     def quack(self):
         self.goose.honk()
+    
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
 
     def notify_observers(self):
         self.observable.notify_observers()
@@ -97,11 +112,18 @@ class QuackCounter(Quackable):
     number_of_quacks = 0
 
     def __init__(self, duck):
-        self.duck = duck  
+        self.duck = duck
+        self.observable: Observable = Observable(self)
 
     def quack(self):
         self.duck.quack()
         self.counter()
+    
+    def register_observer(self, observer):
+        self.observable.register_observer(observer)
+
+    def notify_observers(self):
+        self.observable.notify_observers()
 
     @classmethod
     def counter(cls):
